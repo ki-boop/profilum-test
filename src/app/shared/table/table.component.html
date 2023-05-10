@@ -1,0 +1,29 @@
+<div class="search-wrapper">
+  <app-search-input (change)="search($event)"></app-search-input>
+  <app-loading-switcher></app-loading-switcher>
+</div>
+<div class="table-wrapper">
+  <table>
+    <thead>
+      <th *ngFor="let col of config.columns">
+        {{ col.header }}
+      </th>
+    </thead>
+    <tbody [class.load]="loading">
+      <div class="loader-wrapper" *ngIf="loading">
+        <div class="loader"></div>
+      </div>
+      <tr *ngFor="let row of config.data">
+        <td *ngFor="let col of config.columns" [attr.data-label]="col.header">
+          {{ row[col.field] || "Ошибка в названии поля" }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="pagination">
+  <app-pagination
+    (changePage)="fetchPaginated($event)"
+    [totalRecords]="80"
+  ></app-pagination>
+</div>

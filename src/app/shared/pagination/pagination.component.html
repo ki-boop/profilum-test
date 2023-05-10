@@ -1,0 +1,25 @@
+<div class="pagination-wrapper">
+  <span
+    class="pagination_btn"
+    [class.disabled]="isLastPrev"
+    (click)="maxPrev()"
+  >
+    <<
+  </span>
+  <span class="pagination_btn" [class.disabled]="isLastPrev" (click)="prev()">
+    <
+  </span>
+  <div class="page">
+    <span>{{ currentPage.value }}</span>
+  </div>
+  <span class="pagination_btn" [class.disabled]="isLastNext" (click)="next()">
+    >
+  </span>
+  <span
+    class="pagination_btn"
+    [class.disabled]="isLastNext"
+    (click)="maxNext()"
+  >
+    >>
+  </span>
+</div>
