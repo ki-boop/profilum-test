@@ -4,10 +4,12 @@
   justify-content: center;
   flex-direction: column;
 }
+
 .table-wrapper {
   width: 80%;
   max-width: fit-content;
 }
+
 .search-wrapper {
   display: flex;
   align-items: center;
@@ -131,10 +133,10 @@ tbody {
     }
   }
 
-    .search-wrapper{
-      justify-content: center;
-      gap: 0;
-    }
+  .search-wrapper {
+    justify-content: center;
+    gap: 0;
+  }
 }
 
 .loader-wrapper {
@@ -172,8 +174,6 @@ tbody {
   justify-content: center;
   margin-top: 20px;
 }
-
-
 
 .scrollable {
   overflow-y: auto;

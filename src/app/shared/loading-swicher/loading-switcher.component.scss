@@ -36,16 +36,15 @@
     transition: all 0.3s ease-in-out;
   }
 }
+
 @media screen and (max-width: 800px) {
   .switcher-wrapper {
     width: 100%;
     margin-bottom: 20px;
 
-      label {
-          font-size: 14px;
-          padding-left: 0px;
-        }
+    label {
+      font-size: 14px;
+      padding-left: 0px;
+    }
   }
-
-
 }

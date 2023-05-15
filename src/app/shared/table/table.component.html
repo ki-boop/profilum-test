@@ -1,6 +1,10 @@
 <div class="search-wrapper">
   <app-search-input (change)="search($event)"></app-search-input>
-  <app-loading-switcher [state]="state" (stateChange)="changeState($event)" [loading]="loading"></app-loading-switcher>
+  <app-loading-switcher
+    [state]="state"
+    (stateChange)="changeState($event)"
+    [loading]="loading"
+  ></app-loading-switcher>
 </div>
 <div class="table-wrapper">
   <table
@@ -21,7 +25,7 @@
         <p>Ничего не найдено</p>
         <span (click)="clearSearchRow()">Очистить строку поиска</span>
       </div>
-      <tr *ngFor="let row of config.data, let i = index">
+      <tr *ngFor="let row of config.data; let i = index">
         <td *ngFor="let col of config.columns" [attr.data-label]="col.header">
           {{ row[col.field] || "Ошибка в названии поля" }}
         </td>

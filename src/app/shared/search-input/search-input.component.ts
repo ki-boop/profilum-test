@@ -1,13 +1,12 @@
 import {
   Component,
   EventEmitter,
-  Input,
   OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Subscription, take } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-search-input',

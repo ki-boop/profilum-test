@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription, skip } from 'rxjs';
+import { BehaviorSubject, Subscription, skip } from 'rxjs';
 
 @Component({
   selector: 'app-pagination',
