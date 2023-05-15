@@ -1,12 +1,13 @@
 import {
   Component,
   EventEmitter,
+  Input,
   OnDestroy,
   OnInit,
   Output,
 } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Subscription, take } from 'rxjs';
 
 @Component({
   selector: 'app-search-input',
@@ -14,7 +15,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./search-input.component.scss'],
 })
 export class SearchInputComponent implements OnInit, OnDestroy {
-  @Output() change: EventEmitter<string> = new EventEmitter();
+  @Output() change: EventEmitter<string> = new EventEmitter<string>();
   constructor(private fb: FormBuilder) {}
 
   searchStream$: Subscription | null = null;
@@ -23,9 +24,7 @@ export class SearchInputComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.searchStream$ = this.search.valueChanges.subscribe((change) => {
-      if (this.search.valid) {
-        this.change.emit(change!);
-      }
+      if (this.search.valid) this.change.emit(change || '');
     });
   }
 

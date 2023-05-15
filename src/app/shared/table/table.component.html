@@ -1,9 +1,13 @@
 <div class="search-wrapper">
   <app-search-input (change)="search($event)"></app-search-input>
-  <app-loading-switcher></app-loading-switcher>
+  <app-loading-switcher [state]="state" (stateChange)="changeState($event)" [loading]="loading"></app-loading-switcher>
 </div>
 <div class="table-wrapper">
-  <table>
+  <table
+    (scroll)="onScrollData($event)"
+    [class.scrollable]="!isPagination"
+    #tableElement
+  >
     <thead>
       <th *ngFor="let col of config.columns">
         {{ col.header }}
@@ -13,7 +17,11 @@
       <div class="loader-wrapper" *ngIf="loading">
         <div class="loader"></div>
       </div>
-      <tr *ngFor="let row of config.data">
+      <div *ngIf="isNothingFound && !loading" class="nothing-found">
+        <p>Ничего не найдено</p>
+        <span (click)="clearSearchRow()">Очистить строку поиска</span>
+      </div>
+      <tr *ngFor="let row of config.data, let i = index">
         <td *ngFor="let col of config.columns" [attr.data-label]="col.header">
           {{ row[col.field] || "Ошибка в названии поля" }}
         </td>
@@ -21,9 +29,9 @@
     </tbody>
   </table>
 </div>
-<div class="pagination">
+<div class="pagination" *ngIf="isPagination">
   <app-pagination
     (changePage)="fetchPaginated($event)"
-    [totalRecords]="80"
+    [totalRecords]="counterRecords"
   ></app-pagination>
 </div>

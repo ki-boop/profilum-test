@@ -1,20 +1,30 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BehaviorSubject, skip } from 'rxjs';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { BehaviorSubject, Observable, Subscription, skip } from 'rxjs';
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss'],
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent implements OnInit, OnDestroy {
   @Input() totalRecords: number = 121;
   @Output() changePage: EventEmitter<number> = new EventEmitter();
   currentPage: BehaviorSubject<number> = new BehaviorSubject(1);
+  currentPageStream$: Subscription | null = null;
 
   ngOnInit(): void {
-    this.currentPage.pipe(skip(1)).subscribe((res) => {
-      this.changePage.emit(res);
-    });
+    this.currentPageStream$ = this.currentPage
+      .pipe(skip(1))
+      .subscribe((res) => {
+        this.changePage.emit(res);
+      });
   }
 
   maxPrev() {
@@ -54,14 +64,18 @@ export class PaginationComponent implements OnInit {
   }
 
   get isLastPrev() {
-    return this.currentPage.value === 1;
+    return this.currentPage.value <= 1;
   }
 
   get isLastNext() {
-    return this.currentPage.value == this.totalPages;
+    return this.currentPage.value >= this.totalPages;
   }
 
   get totalPages() {
     return Math.ceil(this.totalRecords / 10);
+  }
+
+  ngOnDestroy(): void {
+    this.currentPageStream$?.unsubscribe();
   }
 }

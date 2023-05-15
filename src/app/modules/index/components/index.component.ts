@@ -11,10 +11,10 @@ import { PersonsService } from '../services/index.service';
 export class IndexComponent {
   constructor(private indexService: PersonsService) {}
 
-  loading: boolean = false;
-
   config: ItableConfig<PersonModel> = {
     data: [],
+    // Select used fields
+    // TODO: custom action
     columns: [
       { field: 'name', header: 'Имя' },
       { field: 'gender', header: 'Гендер' },

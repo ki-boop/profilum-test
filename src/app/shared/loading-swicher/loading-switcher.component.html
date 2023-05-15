@@ -1,4 +1,17 @@
 <div class="switcher-wrapper">
-  <div>Пагинация</div>
-  <div>Скролл</div>
+  <label>
+    <input
+      type="radio"
+      [(ngModel)]="state"
+      name="pagination"
+      value="pagination"
+      (ngModelChange)="changes($event)"
+    />
+    <span class="fake-label">Пагинация</span>
+  </label>
+  <label>
+    <input type="radio" name="scroll" [(ngModel)]="state" (ngModelChange)="changes($event)" value="scroll" />
+    <span class="fake-label">Скролл</span>
+
+  </label>
 </div>

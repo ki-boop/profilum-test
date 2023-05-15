@@ -1,4 +1,51 @@
 .switcher-wrapper {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+
+  label {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: -20px;
+    cursor: pointer;
+    font-size: 22px;
+    user-select: none;
+
+    input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+
+      &:checked ~ .fake-label {
+        background-color: #2196f3;
+        color: #fff;
+      }
+    }
+  }
+
+  .fake-label {
+    padding: 5px 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    border: 1px solid rgba(150, 150, 150, 0.467);
+    transition: all 0.3s ease-in-out;
+  }
+}
+@media screen and (max-width: 800px) {
+  .switcher-wrapper {
+    width: 100%;
+    margin-bottom: 20px;
+
+      label {
+          font-size: 14px;
+          padding-left: 0px;
+        }
+  }
+
+
 }

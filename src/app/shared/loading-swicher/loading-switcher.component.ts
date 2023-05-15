@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { LazyLoadingSwitcher } from 'src/app/models/utils';
 
 @Component({
@@ -8,4 +8,11 @@ import { LazyLoadingSwitcher } from 'src/app/models/utils';
 })
 export class LoadingSwitcherComponent {
   @Input() state: LazyLoadingSwitcher = 'pagination';
+  @Input() loading: boolean = false;
+  @Output() stateChange: EventEmitter<LazyLoadingSwitcher> = new EventEmitter();
+
+  changes(state: LazyLoadingSwitcher) {
+    if (this.loading) return;
+    this.stateChange.emit(state);
+  }
 }
